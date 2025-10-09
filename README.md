@@ -57,8 +57,7 @@ The dataset extends the USITC tables with relevant Chapter 99 measures obtained 
     -   Section 301 product lists were extracted from Federal Register PDFs.
     -   Section 232 Canada/Mexico tariffs (announced 4 Mar 2018, exempted 7 Mar 2018) were removed due to origin ambiguity.
 
-6.  Exemptions (e.g. Section 301 exclusions) are flagged so that tariff shifters for that product/program combination are set to zero during the exemption period.\
-    This avoids partially adjusting the rate for mixed-coverage lists.
+6.  Exemptions (e.g. Section 301 exclusions) are flagged so that tariff shifters for that product/program combination are set to zero during the exemption period.
 
 ### Weighting and aggregation
 
@@ -73,23 +72,23 @@ The dataset extends the USITC tables with relevant Chapter 99 measures obtained 
 -   Fajgelbaum, Pablo D., Pinelopi K. Goldberg, Patrick J. Kennedy, and Amit Khandelwal (2019). The Return to Protectionism, *The Quarterly Journal of Economics*, 135(1), pp. 1–55, <https://doi.org/10.1093/qje/qjz036>
 -   Liao, Steven, In Song Kim, Sayumi Miyano, Hao Zhang (2020). concordance: Product Concordance. R package version 2.0.0. <https://CRAN.R-project.org/package=concordance>
 -   Schott, Peter K. (2008). The Relative Sophistication of Chinese Exports, *Economic Policy*, 23(53), pp. 6–49, <https://doi.org/10.1111/j.1468-0327.2007.00195.x>
--   [USITC Harmonized Tariff Schedule](https://hts.usitc.gov/current)\
+-   [USITC Harmonized Tariff Schedule](https://hts.usitc.gov/current)
 -   [GTA Methodology](https://www.globaltradealert.org)
 
 ------------------------------------------------------------------------
 
 ## Contents
 
--   `code/`: R scripts to build correlation shares, aggregate HTS8→HS6, convert HS6→HS6-2012.\
+-   `code/`: R scripts to build correlation shares, aggregate HTS8→HS6, convert HS6→HS6-2012.
 -   `data/temp/`: correlation tables (`correl_hs6_2017_to_2012.csv`, `correl_hs6_2022_to_2012.csv`), base weights, and helper CSVs.
 
 ------------------------------------------------------------------------
 
 ## Version and validation
 
-This is a beta release intended for testing and early feedback.\
+This is a beta release intended for testing and early feedback.
 
-Planned improvements include:\
-- Expanded documentation and validation of HTS8→HS6 weighting.\
-- Additional checks across years and code revisions.\
+Planned improvements include:
+- Expanded documentation and validation of HTS8→HS6 weighting.
+- Additional checks across years and code revisions.
 - Review of specific-rate conversions and special measures coverage.
