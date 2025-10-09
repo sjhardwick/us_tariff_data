@@ -1,0 +1,24 @@
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Working notes
+data_notes.md
+
+# Big/local data
+data/raw/
+data/temp/archive/
+data/temp/*.parquet
+data/processed/tariffs_hts8_quarterly/
+data/processed/**/*.parquet
+
+# Cache / temp
+*.tmp
+*.log

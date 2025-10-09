@@ -1,0 +1,234 @@
+cty_code,i_name,i_iso3
+1220,Canada,CAN
+1610,St Pierre and Miquelon,SPM
+2010,Mexico,MEX
+2050,Guatemala,GTM
+2080,Belize,BLZ
+2110,El Salvador,SLV
+2150,Honduras,HND
+2190,Nicaragua,NIC
+2230,Costa Rica,CRI
+2250,Panama,PAN
+2320,Bermuda,BMU
+2360,Bahamas,BHS
+2390,Cuba,CUB
+2410,Jamaica,JAM
+2430,Turks and Caicos Islands,TCA
+2440,Cayman Islands,CYM
+2450,Haiti,HTI
+2470,Dominican Republic,DOM
+2481,Anguilla,AIA
+2482,British Virgin Islands,VGB
+2483,St Kitts and Nevis,KNA
+2484,Antigua and Barbuda,ATG
+2485,Montserrat,MSR
+2486,Dominica,DMA
+2487,St Lucia,LCA
+2488,St Vincent and the Grenadines,VCT
+2489,Grenada,GRD
+2720,Barbados,BRB
+2740,Trinidad and Tobago,TTO
+2774,Sint Maarten,SXM
+2777,Curacao,CUW
+2779,Aruba,ABW
+2831,Guadeloupe,GLP
+2839,Martinique,MTQ
+3010,Colombia,COL
+3070,Venezuela,VEN
+3120,Guyana,GUY
+3150,Suriname,SUR
+3170,French Guiana,GUF
+3310,Ecuador,ECU
+3330,Peru,PER
+3350,Bolivia,BOL
+3370,Chile,CHL
+3510,Brazil,BRA
+3530,Paraguay,PRY
+3550,Uruguay,URY
+3570,Argentina,ARG
+3720,Falkland Islands (Islas Malvinas),FLK
+4000,Iceland,ISL
+4010,Sweden,SWE
+4031,"Svalbard, Jan Mayen Island",SJM
+4039,Norway,NOR
+4050,Finland,FIN
+4091,Faroe Islands,FRO
+4099,Denmark,DNK
+4120,United Kingdom,GBR
+4190,Ireland,IRL
+4210,Netherlands,NLD
+4231,Belgium,BEL
+4239,Luxembourg,LUX
+4271,Andorra,AND
+4272,Monaco,MCO
+4279,France,FRA
+4280,Germany,DEU
+4330,Austria,AUT
+4351,Czech Republic,CZE
+4359,Slovakia,SVK
+4370,Hungary,HUN
+4411,Liechtenstein,LIE
+4419,Switzerland,CHE
+4470,Estonia,EST
+4490,Latvia,LVA
+4510,Lithuania,LTU
+4550,Poland,POL
+4621,Russia,RUS
+4622,Belarus,BLR
+4623,Ukraine,UKR
+4631,Armenia,ARM
+4632,Azerbaijan,AZE
+4633,Georgia,GEO
+4634,Kazakhstan,KAZ
+4635,Kyrgyzstan,KGZ
+4641,Moldova,MDA
+4642,Tajikistan,TJK
+4643,Turkmenistan,TKM
+4644,Uzbekistan,UZB
+4700,Spain,ESP
+4710,Portugal,PRT
+4720,Gibraltar,GIB
+4730,Malta,MLT
+4751,San Marino,SMR
+4752,Vatican City,VAT
+4759,Italy,ITA
+4791,Croatia,HRV
+4792,Slovenia,SVN
+4793,Bosnia and Herzegovina,BIH
+4794,North Macedonia,MKD
+4801,Serbia,SRB
+4804,Montenegro,MNE
+4810,Albania,ALB
+4840,Greece,GRC
+4850,Romania,ROU
+4870,Bulgaria,BGR
+4890,Turkey,TUR
+4910,Cyprus,CYP
+5020,Syria,SYR
+5040,Lebanon,LBN
+5050,Iraq,IRQ
+5070,Iran,IRN
+5081,Israel,ISR
+5110,Jordan,JOR
+5130,Kuwait,KWT
+5170,Saudi Arabia,SAU
+5180,Qatar,QAT
+5200,United Arab Emirates,ARE
+5210,Yemen,YEM
+5230,Oman,OMN
+5250,Bahrain,BHR
+5310,Afghanistan,AFG
+5330,India,IND
+5350,Pakistan,PAK
+5360,Nepal,NPL
+5380,Bangladesh,BGD
+5420,Sri Lanka,LKA
+5460,Burma,MMR
+5490,Thailand,THA
+5520,Vietnam,VNM
+5530,Laos,LAO
+5550,Cambodia,KHM
+5570,Malaysia,MYS
+5590,Singapore,SGP
+5600,Indonesia,IDN
+5601,Timor-Leste,TLS
+5610,Brunei,BRN
+5650,Philippines,PHL
+5660,Macau,MAC
+5682,Bhutan,BTN
+5683,Maldives,MDV
+5700,China,CHN
+5740,Mongolia,MNG
+5790,"Korea, North",PRK
+5800,"Korea, South",KOR
+5820,Hong Kong,HKG
+5830,Taiwan,TWN
+5880,Japan,JPN
+6021,Australia,AUS
+6022,Norfolk Island,NFK
+6023,Cocos (Keeling) Islands,CCK
+6024,Christmas Island,CXR
+6029,Heard and McDonald Islands,HMD
+6040,Papua New Guinea,PNG
+6141,New Zealand,NZL
+6142,Cook Islands,COK
+6143,Tokelau,TKL
+6144,Niue,NIU
+6150,Samoa,WSM
+6223,Solomon Islands,SLB
+6224,Vanuatu,VUT
+6225,Pitcairn Islands,PCN
+6226,Kiribati,KIR
+6227,Tuvalu,TUV
+6412,New Caledonia,NCL
+6413,Wallis and Futuna,WLF
+6414,French Polynesia,PYF
+6810,Marshall Islands,MHL
+6830,Palau,PLW
+6862,Nauru,NRU
+6863,Fiji,FJI
+6864,Tonga,TON
+7140,Morocco,MAR
+7210,Algeria,DZA
+7230,Tunisia,TUN
+7250,Libya,LBY
+7290,Egypt,EGY
+7321,Sudan,SDN
+7323,South Sudan,SSD
+7380,Equatorial Guinea,GNQ
+7410,Mauritania,MRT
+7420,Cameroon,CMR
+7440,Senegal,SEN
+7450,Mali,MLI
+7460,Guinea,GIN
+7470,Sierra Leone,SLE
+7480,Cote d'Ivoire,CIV
+7490,Ghana,GHA
+7500,Gambia,GMB
+7510,Niger,NER
+7520,Togo,TGO
+7530,Nigeria,NGA
+7540,Central African Republic,CAF
+7550,Gabon,GAB
+7560,Chad,TCD
+7580,St Helena,SHN
+7600,Burkina Faso,BFA
+7610,Benin,BEN
+7620,Angola,AGO
+7630,Congo (Brazzaville),COG
+7642,Guinea-Bissau,GNB
+7643,Cabo Verde,CPV
+7644,Sao Tome and Principe,STP
+7650,Liberia,LBR
+7660,Congo (Kinshasa),COD
+7670,Burundi,BDI
+7690,Rwanda,RWA
+7700,Somalia,SOM
+7741,Eritrea,ERI
+7749,Ethiopia,ETH
+7770,Djibouti,DJI
+7780,Uganda,UGA
+7790,Kenya,KEN
+7800,Seychelles,SYC
+7810,British Indian Ocean Territories,IOT
+7830,Tanzania,TZA
+7850,Mauritius,MUS
+7870,Mozambique,MOZ
+7880,Madagascar,MDG
+7881,Mayotte,MYT
+7890,Comoros,COM
+7904,Reunion,REU
+7905,French Southern and Antarctic Lands,ATF
+7910,South Africa,ZAF
+7920,Namibia,NAM
+7930,Botswana,BWA
+7940,Zambia,ZMB
+7950,Eswatini,SWZ
+7960,Zimbabwe,ZWE
+7970,Malawi,MWI
+7990,Lesotho,LSO
+9030,Puerto Rico,PRI
+9350,Guam,GUM
+9510,American Samoa,ASM
+9610,Northern Mariana Islands,MNP
+9800,US minor outlying Islands,UMI
