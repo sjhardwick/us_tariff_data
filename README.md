@@ -13,16 +13,16 @@ Each release archive (`.zip`) contains a single CSV file of the full dataset.
 
 ## How tariff rates were obtained
 
-### Core coverage (Chapters 1–97)
+### Core coverage
 
--   Base data are drawn from USITC annual tariff tables for Chapters 1–97.
+-   Base data are drawn from US International Trade Commission (USITC) [annual tariff tables](https://dataweb.usitc.gov/tariff/annual) for Chapters 1–97.
 -   These provide official applied and scheduled tariff rates for all HTS8 codes.
 
-The dataset extends the USITC tables with relevant Chapter 99 measures obtained from Global Trade Alert. This includes Section 232 and 301 tariffs, for example.
+The dataset extends the USITC tables with relevant additional measures obtained from Global Trade Alert. This includes Section 232 and 301 tariffs, for example.
 
 ### Retrieving special measures from Global Trade Alert
 
-1.  Extract all GTA measures implemented since 1 January 2015.
+1.  Extract all Global Trade Alert (GTA) measures implemented since 1 January 2015.
 
 2.  Filter (`code/compile_gta_data.R`) to import tariffs that are:
 
