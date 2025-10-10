@@ -110,7 +110,7 @@ aggregate_hts8_file <- function(file_path) {
     summarise(
       n_hts8 = sum(!is.na(applied_ave)),
       
-      # weighted (renormalize to observed lines)
+      # weighted (renormalise to observed lines)
       wsum_base = sum(s_h8_in_h6[!is.na(applied_ave) & !is.na(s_h8_in_h6)], na.rm = TRUE),
       tariff_weighted_hs6 = if_else(
         wsum_base > 0,
@@ -209,4 +209,35 @@ coverage <- all_hs6_2012 %>%
     pct_weighted = n_weighted / n_total
   )
 
-message("✅ Done! HS6-2012 quarterly tariffs (weighted + simple) written to: ", out_dir)
+message("Done! HS6-2012 quarterly tariffs (weighted + simple) written to: ", out_dir)
+
+# Save in one large file (parquet or csv)
+arrow::write_parquet(
+  all_hs6_2012,
+  "data/processed/tariffs_hs6_2012_quarterly.parquet",
+  compression = "snappy"
+)
+
+write_csv(all_hs6_2012, "data/processed/tariffs_hs6_2012_quarterly.csv")
+zip::zip(
+  "data/processed/tariffs_hs6_2012_quarterly.zip", 
+  "data/processed/tariffs_hs6_2012_quarterly.csv"
+)
+
+# Create and save annual version (use data.table for speed)
+library(data.table)
+
+DT <- as.data.table(all_hs6_2012)
+measure_cols <- grep("^(tariff_|schedule_)", names(DT), value = TRUE)
+
+annual_dt <- DT[year < 2025,
+                lapply(.SD, function(x) mean(x, na.rm = TRUE)),
+                by = .(i_iso3, hs6, year),
+                .SDcols = measure_cols
+]
+
+write_csv(annual_dt, "data/processed/tariffs_hs6_2012_annual.csv")
+zip::zip(
+  "data/processed/tariffs_hs6_2012_annual_v0.1.0-beta.zip", 
+  "data/processed/tariffs_hs6_2012_annual.csv"
+)

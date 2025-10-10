@@ -4,13 +4,14 @@
 
 *Beta version:* This dataset, code and documentation are still being tested, edited and validated. Please report inconsistencies or unexpected results via [GitHub issues](../../issues).
 
-------------------------------------------------------------------------
+## Download the data
+
+The latest **quarterly HS6–2012 tariff dataset (2015 Q1–2025 Q2)** is available from the  
+[**Releases page**](https://github.com/sjhardwick/us_tariff_data/releases).
+
+Each release archive (`.zip`) contains a single CSV file of the full dataset.
 
 ## Overview
-
-**The repository currently includes code and metadata only. The HS6–2012 quarterly tariff dataset (2015 Q1 to 2025 Q2) will be released shortly as a downloadable file.**
-
-The code in this repository aggregates US tariff schedules at the 8-digit Harmonized Tariff Schedule (HTS8) level, harmonises them to HS6-2012, and reports both weighted and simple averages.
 
 Primary sources:
 
@@ -18,11 +19,9 @@ Primary sources:
 
 -   Global Trade Alert (GTA) policy interventions (Chapter 99 and special measures)
 
--   Trade data from the US Census Bureau [compiled by Peter K Schott](https://sompks4.github.io/sub_data.html) (for weights and unit values)
+-   Trade data from the US Census Bureau [compiled by Peter K. Schott](https://sompks4.github.io/sub_data.html) (for weights and unit values)
 
-------------------------------------------------------------------------
-
-## How the tariff data were obtained
+## How tariff rates were obtained
 
 ### Core coverage (Chapters 1–97)
 
@@ -67,22 +66,10 @@ The dataset extends the USITC tables with relevant Chapter 99 measures obtained 
     -   Weighted averages use 2012–2014 trade shares (similar to Fajgelbaum et al., 2019).
     -   Simple averages are provided as an alternative measure.
 
-### References
-
--   Fajgelbaum, Pablo D., Pinelopi K. Goldberg, Patrick J. Kennedy, and Amit Khandelwal (2019). The Return to Protectionism, *The Quarterly Journal of Economics*, 135(1), pp. 1–55, <https://doi.org/10.1093/qje/qjz036>
--   Liao, Steven, In Song Kim, Sayumi Miyano, Hao Zhang (2020). concordance: Product Concordance. R package version 2.0.0. <https://CRAN.R-project.org/package=concordance>
--   Schott, Peter K. (2008). The Relative Sophistication of Chinese Exports, *Economic Policy*, 23(53), pp. 6–49, <https://doi.org/10.1111/j.1468-0327.2007.00195.x>
--   [USITC Harmonized Tariff Schedule](https://hts.usitc.gov/current)
--   [GTA Methodology](https://www.globaltradealert.org)
-
-------------------------------------------------------------------------
-
 ## Contents
 
 -   `code/`: R scripts to build correlation shares, aggregate HTS8→HS6, convert HS6→HS6-2012.
 -   `data/temp/`: correlation tables (`correl_hs6_2017_to_2012.csv`, `correl_hs6_2022_to_2012.csv`), base weights, and helper CSVs.
-
-------------------------------------------------------------------------
 
 ## Version and validation
 
@@ -92,3 +79,11 @@ Planned improvements include:
 - Expanded documentation and validation of HTS8→HS6 weighting.
 - Additional checks across years and code revisions.
 - Review of specific-rate conversions and special measures coverage.
+
+## References
+
+-   Fajgelbaum, Pablo D., Pinelopi K. Goldberg, Patrick J. Kennedy, and Amit Khandelwal (2019). The Return to Protectionism, *The Quarterly Journal of Economics*, 135(1), pp. 1–55, <https://doi.org/10.1093/qje/qjz036>
+-   Liao, Steven, In Song Kim, Sayumi Miyano, Hao Zhang (2020). concordance: Product Concordance. R package version 2.0.0. <https://CRAN.R-project.org/package=concordance>
+-   Schott, Peter K. (2008). The Relative Sophistication of Chinese Exports, *Economic Policy*, 23(53), pp. 6–49, <https://doi.org/10.1111/j.1468-0327.2007.00195.x>
+-   [USITC Harmonized Tariff Schedule](https://hts.usitc.gov/current)
+-   [GTA Methodology](https://www.globaltradealert.org)
