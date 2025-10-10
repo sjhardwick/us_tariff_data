@@ -11,16 +11,6 @@ The latest **quarterly HS6–2012 tariff dataset (2015 Q1–2025 Q2)** is availa
 
 Each release archive (`.zip`) contains a single CSV file of the full dataset.
 
-## Overview
-
-Primary sources:
-
--   USITC annual tariff tables (Chapters 1–97)
-
--   Global Trade Alert (GTA) policy interventions (Chapter 99 and special measures)
-
--   Trade data from the US Census Bureau [compiled by Peter K. Schott](https://sompks4.github.io/sub_data.html) (for weights and unit values)
-
 ## How tariff rates were obtained
 
 ### Core coverage (Chapters 1–97)
@@ -34,12 +24,11 @@ The dataset extends the USITC tables with relevant Chapter 99 measures obtained 
 
 1.  Extract all GTA measures implemented since 1 January 2015.
 
-2.  Filter (\`code/compile_gta_data.R\`) to import tariffs that are:
+2.  Filter (`code/compile_gta_data.R`) to import tariffs that are:
 
     -   Implemented at the national level (exclude subnational or firm-specific).
-    -   Not simple reclassifications or court rulings on product classification.
-    -   Not preference scheme changes (e.g. GSP updates) already captured in USITC lists.
-    -   Not other overlapping “tariff changes” captured in USITC Chapter 1–97 tables.
+    -   Not product reclassifications (that retain prior tariff rates) or court rulings on product classification.
+    -   Not preference scheme changes (e.g. GSP updates) or other tariff changes that are already captured in USITC tables.
     -   Not cancelled before they took effect (specifically, the time between implementation and removal must exceed one day).
 
 3.  After filtering, 132 GTA interventions remain, each linked to affected jurisdictions and HS-6 sectors (`data/temp/gta.xlsx`). Additional manual filtering is undertaken to consolidate or remove duplicates, remove measures based solely on originating content (e.g. aluminium originating in Russia) or that remove *de minimis* thresholds.
