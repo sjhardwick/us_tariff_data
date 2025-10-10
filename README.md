@@ -33,8 +33,6 @@ The dataset extends the USITC tables with relevant Chapter 99 measures obtained 
 
 3.  After filtering, 132 GTA interventions remain, each linked to affected jurisdictions and HS-6 sectors (`data/temp/gta.xlsx`). Additional manual filtering is undertaken to consolidate or remove duplicates, remove measures based solely on originating content (e.g. aluminium originating in Russia) or that remove *de minimis* thresholds.
 
-    -   Section 232 Canada/Mexico tariffs (announced 4 March 2018) were removed, because after 7 March, it was announced that USMCA compliant goods, which depend on rules of origin, would be exempt.
-
 4.  This further filtering reduces the number of interventions to 89 (`data/temp/measures.csv`).
 
 5.  Each intervention is manually coded to indicate whether it adds to or overrides an existing tariff rate.
