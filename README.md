@@ -13,10 +13,10 @@ Each release archive (`.zip`) contains a single CSV file of the full dataset.
 
 ## To-do
 
-[ ] Review `preferences.csv` to accurately reflect changes in preference schemes over time
-[ ] Use concordances for 2010 and 2011 import data to obtain more accurate HTS-2012 unit values
-[ ] Upload annual dataset
-[ ] Add 2025 Q3–Q4 data once available
+-   [ ] Review `data/raw/preferences.csv` to ensure accurate reflection of changes in preference schemes
+-   [ ] Use concordances for 2010 and 2011 import data to obtain more accurate HTS-2012 unit values
+-   [ ] Upload annual dataset
+-   [ ] Add 2025 Q3–Q4 data once available
 
 ## How tariff rates were obtained
 
