@@ -24,7 +24,7 @@ warn_once <- local({
 # --- External helpers & reference data ---
 source("code/tariff_functions.R")  # mfn_rates(), pref_rates(), col2_rates(), fix_commodity(), hts8_to_hs07()
 countries   <- read_csv("data/temp/countries.csv",             show_col_types = FALSE)  # i_iso3
-unit_values <- read_csv("data/temp/unit_values_2012_2014.csv", show_col_types = FALSE)  # AVE conversion
+unit_values <- read_csv("data/temp/unit_values_2010_2012.csv", show_col_types = FALSE)  # AVE conversion
 
 # --- USITC reader (as-of quarter start) ---
 read_usitc_asof <- function(y, asof) {
@@ -127,7 +127,7 @@ compile_quarter_hts8 <- function(y, q_start, countries, unit_values) {
 }
 
 # ---------- Quarters to build ----------
-years <- 2015:2025
+years <- 2013:2025
 qs <- qstarts(years)
 qs <- qs[ year(qs) < 2025 | quarter(qs) <= 2 ]  # through 2025Q2
 

@@ -1,5 +1,6 @@
 
 library(tidyverse)
+library(openxlsx)
 
 # set the folder containing the CSV files
 folder_path <- "data/raw/gta"
@@ -31,6 +32,4 @@ clean_data <- all_data %>%
   ) %>%
   filter(is.na(duration) | duration >= 1)
 
-install.packages("openxlsx")
-library(openxlsx)
 write.xlsx(clean_data, "data/temp/gta.xlsx")

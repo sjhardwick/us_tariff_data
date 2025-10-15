@@ -236,6 +236,12 @@ annual_dt <- DT[year < 2025,
                 .SDcols = measure_cols
 ]
 
+arrow::write_parquet(
+  annual_dt,
+  "data/processed/tariffs_hs6_2012_annual.parquet",
+  compression = "snappy"
+)
+
 write_csv(annual_dt, "data/processed/tariffs_hs6_2012_annual.csv")
 zip::zip(
   "data/processed/tariffs_hs6_2012_annual_v0.1.0-beta.zip", 

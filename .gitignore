@@ -13,7 +13,8 @@ Thumbs.db
 data_notes.md
 
 # Big/local data
-data/raw/
+data/raw/trade_schott
+data/raw/tariffs_usitc
 data/temp/archive/
 data/temp/*.parquet
 data/processed/tariffs_hts8_quarterly/
