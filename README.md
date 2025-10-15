@@ -11,6 +11,13 @@ The latest **quarterly HS6–2012 tariff dataset (2015 Q1–2025 Q2)** is availa
 
 Each release archive (`.zip`) contains a single CSV file of the full dataset.
 
+## To-do
+
+[ ] Review `preferences.csv` to accurately reflect changes in preference schemes over time
+[ ] Use concordances for 2010 and 2011 import data to obtain more accurate HTS-2012 unit values
+[ ] Upload annual dataset
+[ ] Add 2025 Q3–Q4 data once available
+
 ## How tariff rates were obtained
 
 ### Core coverage
