@@ -1,0 +1,242 @@
+1B1010 GREENLD    Greenland                                         
+1B1220 CANADA     Canada                                            
+1B1610 SP MQEL    St Pierre and Miquelon                            
+1B2010 MEXICO     Mexico                                            
+1B2050 GUATMAL    Guatemala                                         
+1B2080 BELIZE     Belize                                            
+1B2110 SALVADR    El Salvador                                       
+1B2150 HONDURA    Honduras                                          
+1B2190 NICARAG    Nicaragua                                         
+1B2230 C RICA     Costa Rica                                        
+1B2250 PANAMA     Panama                                            
+1B2320 BERMUDA    Bermuda                                           
+1B2360 BAHAMAS    Bahamas                                           
+1B2390 CUBA       Cuba                                              
+1B2410 JAMAICA    Jamaica                                           
+1B2430 TURK IS    Turks and Caicos Islands                          
+1B2440 CAYMAN     Cayman Islands                                    
+1B2450 HAITI      Haiti                                             
+1B2470 DOM REP    Dominican Republic                                
+1B2481 ANGLLA     Anguilla                                          
+1B2482 B VIRGN    British Virgin Islands                            
+1B2483 ST K N     St Kitts and Nevis                                
+1B2484 ANTIGUA    Antigua and Barbuda                               
+1B2485 MONSRAT    Montserrat                                        
+1B2486 DOMINCA    Dominica                                          
+1B2487 S LUCIA    St Lucia                                          
+1B2488 S VN GR    St Vincent and the Grenadines                     
+1B2489 GRENADA    Grenada                                           
+1B2720 BARBADO    Barbados                                          
+1B2740 TRINID     Trinidad and Tobago                               
+1B2774 S MAARTEN  Sint Maarten                                      
+1B2777 CURACO     Curacao                                           
+1B2779 ARUBA      Aruba                                             
+1B2831 GUADLPE    Guadeloupe                                        
+1B2839 MARTINQ    Martinique                                        
+1B3010 COLOMB     Colombia                                          
+1B3070 VENEZ      Venezuela                                         
+1B3120 GUYANA     Guyana                                            
+1B3150 SURINAM    Suriname                                          
+1B3170 F GUIAN    French Guiana                                     
+1B3310 ECUADOR    Ecuador                                           
+1B3330 PERU       Peru                                              
+1B3350 BOLIVIA    Bolivia                                           
+1B3370 CHILE      Chile                                             
+1B3510 BRAZIL     Brazil                                            
+1B3530 PARAGUA    Paraguay                                          
+1B3550 URUGUAY    Uruguay                                           
+1B3570 ARGENT     Argentina                                         
+1B3720 FALK IS    Falkland Islands (Islas Malvinas)                 
+1B4000 ICELAND    Iceland                                           
+1B4010 SWEDEN     Sweden                                            
+1B4031 SV JM IS   Svalbard, Jan Mayen Island                        
+1B4039 NORWAY     Norway                                            
+1B4050 FINLAND    Finland                                           
+1B4091 FAROE      Faroe Islands                                     
+1B4099 DENMARK    Denmark                                           
+1B4120 U KING     United Kingdom                                    
+1B4190 IRELAND    Ireland                                           
+1B4210 NETHLDS    Netherlands                                       
+1B4231 BELGIUM    Belgium                                           
+1B4239 LUXMBRG    Luxembourg                                        
+1B4271 ANDORRA    Andorra                                           
+1B4272 MONACO     Monaco                                            
+1B4279 FRANCE     France                                            
+1B4280 GERMANY    Germany                                           
+1B4330 AUSTRIA    Austria                                           
+1B4351 CZECH      Czech Republic                                    
+1B4359 SLOVAK     Slovakia                                          
+1B4370 HUNGARY    Hungary                                           
+1B4411 LICHTEN    Liechtenstein                                     
+1B4419 SWITZLD    Switzerland                                       
+1B4470 ESTONIA    Estonia                                           
+1B4490 LATVIA     Latvia                                            
+1B4510 LITHUAN    Lithuania                                         
+1B4550 POLAND     Poland                                            
+1B4621 RUSSIA     Russia                                            
+1B4622 BELAR      Belarus                                           
+1B4623 UKRAINE    Ukraine                                           
+1B4631 ARMENIA    Armenia                                           
+1B4632 AZERBJN    Azerbaijan                                        
+1B4633 GEORGIA    Georgia                                           
+1B4634 KAZAKHS    Kazakhstan                                        
+1B4635 KYRGYZS    Kyrgyzstan                                        
+1B4641 MOLDOVA    Moldova                                           
+1B4642 TAJIKIS    Tajikistan                                        
+1B4643 TURKMEN    Turkmenistan                                      
+1B4644 UZBEKIS    Uzbekistan                                        
+1B4700 SPAIN      Spain                                             
+1B4710 PORTUGL    Portugal                                          
+1B4720 GIBRALT    Gibraltar                                         
+1B4730 MALTA      Malta                                             
+1B4751 SAN MAR    San Marino                                        
+1B4752 VAT CTY    Vatican City                                      
+1B4759 ITALY      Italy                                             
+1B4791 CROATIA    Croatia                                           
+1B4792 SLVENIA    Slovenia                                          
+1B4793 BOSNIA     Bosnia and Herzegovina                            
+1B4794 NMACEDON   North Macedonia                                   
+1B4801 SERBIA     Serbia                                            
+1B4803 KOSOVO     Kosovo                                            
+1B4804 MONTENE    Montenegro                                        
+1B4810 ALBANIA    Albania                                           
+1B4840 GREECE     Greece                                            
+1B4850 ROMANIA    Romania                                           
+1B4870 BULGAR     Bulgaria                                          
+1B4890 TURKEY     Turkey                                            
+1B4910 CYPRUS     Cyprus                                            
+1B5020 SYRIA      Syria                                             
+1B5040 LEBANON    Lebanon                                           
+1B5050 IRAQ       Iraq                                              
+1B5070 IRAN       Iran                                              
+1B5081 ISRAEL     Israel                                            
+1B5082 GAZA       Gaza Strip Administered by Israel                 
+1B5083 WESTBNK    West Bank Administered by Israel                  
+1B5110 JORDAN     Jordan                                            
+1B5130 KUWAIT     Kuwait                                            
+1B5170 S ARAB     Saudi Arabia                                      
+1B5180 QATAR      Qatar                                             
+1B5200 ARAB EM    United Arab Emirates                              
+1B5210 YEMEN      Yemen                                             
+1B5230 OMAN       Oman                                              
+1B5250 BAHRAIN    Bahrain                                           
+1B5310 AFGHAN     Afghanistan                                       
+1B5330 INDIA      India                                             
+1B5350 PAKISTN    Pakistan                                          
+1B5360 NEPAL      Nepal                                             
+1B5380 BNGLDSH    Bangladesh                                        
+1B5420 SRI LKA    Sri Lanka                                         
+1B5460 BURMA      Burma                                             
+1B5490 THAILND    Thailand                                          
+1B5520 VIETNAM    Vietnam                                           
+1B5530 LAOS       Laos                                              
+1B5550 CAMBOD     Cambodia                                          
+1B5570 MALAYSA    Malaysia                                          
+1B5590 SINGAPR    Singapore                                         
+1B5600 INDNSIA    Indonesia                                         
+1B5601 TIM-LES    Timor-Leste                                       
+1B5610 BRUNEI     Brunei                                            
+1B5650 PHIL R     Philippines                                       
+1B5660 MACAU      Macau                                             
+1B5682 BHUTAN     Bhutan                                            
+1B5683 MALDIVE    Maldives                                          
+1B5700 CHINA      China                                             
+1B5740 MONGOLA    Mongolia                                          
+1B5790 NO KOR     Korea, North                                      
+1B5800 KOR REP    Korea, South                                      
+1B5820 HG KONG    Hong Kong                                         
+1B5830 TAIWAN     Taiwan                                            
+1B5880 JAPAN      Japan                                             
+1B6021 AUSTRAL    Australia                                         
+1B6022 NORFOLK    Norfolk Island                                    
+1B6023 COCOS I    Cocos (Keeling) Islands                           
+1B6024 CRIST I    Christmas Island                                  
+1B6029 HEARD I    Heard and McDonald Islands                        
+1B6040 NEW GUI    Papua New Guinea                                  
+1B6141 N ZEAL     New Zealand                                       
+1B6142 COOK IS    Cook Islands                                      
+1B6143 TOKELAU    Tokelau                                           
+1B6144 NIUE       Niue                                              
+1B6150 SAMOA      Samoa                                             
+1B6223 SOLMN I    Solomon Islands                                   
+1B6224 VANUATU    Vanuatu                                           
+1B6225 PITCARN    Pitcairn Islands                                  
+1B6226 KIRIBAT    Kiribati                                          
+1B6227 TUVALU     Tuvalu                                            
+1B6412 N CALDN    New Caledonia                                     
+1B6413 WALLIS     Wallis and Futuna                                 
+1B6414 FR POLY    French Polynesia                                  
+1B6810 MARSHAL    Marshall Islands                                  
+1B6820 MICRONS    Micronesia                                        
+1B6830 PALAU      Palau                                             
+1B6862 NAURU      Nauru                                             
+1B6863 FIJI       Fiji                                              
+1B6864 TONGA      Tonga                                             
+1B7140 MOROC      Morocco                                           
+1B7210 ALGERIA    Algeria                                           
+1B7230 TUNISIA    Tunisia                                           
+1B7250 LIBYA      Libya                                             
+1B7290 EGYPT      Egypt                                             
+1B7321 SUDAN      Sudan                                             
+1B7323 S SUDAN    South Sudan                                       
+1B7380 EQ GUIN    Equatorial Guinea                                 
+1B7410 MAURITN    Mauritania                                        
+1B7420 CAMROON    Cameroon                                          
+1B7440 SENEGAL    Senegal                                           
+1B7450 MALI       Mali                                              
+1B7460 GUINEA     Guinea                                            
+1B7470 SIER LN    Sierra Leone                                      
+1B7480 IVY CST    Cote d'Ivoire                                     
+1B7490 GHANA      Ghana                                             
+1B7500 GAMBIA     Gambia                                            
+1B7510 NIGER      Niger                                             
+1B7520 TOGO       Togo                                              
+1B7530 NIGERIA    Nigeria                                           
+1B7540 C AF RP    Central African Republic                          
+1B7550 GABON      Gabon                                             
+1B7560 CHAD       Chad                                              
+1B7580 S HELN     St Helena                                         
+1B7600 BURKINA    Burkina Faso                                      
+1B7610 BENIN      Benin                                             
+1B7620 ANGOLA     Angola                                            
+1B7630 CONGO B    Congo (Brazzaville)                               
+1B7642 G BISAU    Guinea-Bissau                                     
+1B7643 C VERDE    Cabo Verde                                        
+1B7644 SAO T P    Sao Tome and Principe                             
+1B7650 LIBERIA    Liberia                                           
+1B7660 CONGO C    Congo (Kinshasa)                                  
+1B7670 BURUNDI    Burundi                                           
+1B7690 RWANDA     Rwanda                                            
+1B7700 SOMALIA    Somalia                                           
+1B7741 ERITREA    Eritrea                                           
+1B7749 ETHIOP     Ethiopia                                          
+1B7770 DJIBUTI    Djibouti                                          
+1B7780 UGANDA     Uganda                                            
+1B7790 KENYA      Kenya                                             
+1B7800 SEYCHEL    Seychelles                                        
+1B7810 B IND O    British Indian Ocean Territories                  
+1B7830 TNZANIA    Tanzania                                          
+1B7850 MAURIT     Mauritius                                         
+1B7870 MOZAMBQ    Mozambique                                        
+1B7880 MADAGAS    Madagascar                                        
+1B7881 MAYOTTE    Mayotte                                           
+1B7890 COMOROS    Comoros                                           
+1B7904 REUNION    Reunion                                           
+1B7905 F SO ANT   French Southern and Antarctic Lands               
+1B7910 REP SAF    South Africa                                      
+1B7920 NAMIBIA    Namibia                                           
+1B7930 BOTSWAN    Botswana                                          
+1B7940 ZAMBIA     Zambia                                            
+1B7950 ESWATINI   Eswatini                                          
+1B7960 ZMBABWE    Zimbabwe                                          
+1B7970 MALAWI     Malawi                                            
+1B7990 LESOTHO    Lesotho                                           
+1E8220 UNIDENT    Unidentified Countries                            
+1E8500 INT ORG    International Organizations                       
+1E9000 PR T US    Puerto to US                                      
+1E9030 P RICO     Puerto Rico                                       
+1B9110 VIRG IS    Virgin Islands of the United States               
+1I9350 GUAM       Guam                                              
+1I9510 AM SAM     American Samoa                                    
+1I9610 N MAR IS   Northern Mariana Islands                          
+1I9800 US O IS    US minor outlying Islands                                                         
