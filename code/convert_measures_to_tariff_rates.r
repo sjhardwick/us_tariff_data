@@ -47,9 +47,17 @@ measures_raw <- read_csv("data/temp/measures.csv", show_col_types = FALSE)
 
 # --- Parse HS scope strings into rows of (level, code) ---
 expand_scope_string <- function(scope) {
-  if (is.na(scope) || scope == "") return(tibble(level = character(), code = character()))
+  if (is.na(scope) || scope == "") {
+    return(tibble(level = character(), code = character(), all_scope = logical()))
+  }
   
-  scope  <- str_replace_all(scope, "[\u2012\u2013\u2014\u2015]", "-")  # normalize dashes
+  scope  <- str_replace_all(scope, "[\u2012\u2013\u2014\u2015]", "-")  # normalise dashes
+  
+  # detect 'all' (or variants)
+  if (str_detect(str_to_lower(str_squish(scope)), "^(all|all products|all tariff lines)$")) {
+    return(tibble(level = "ALL", code = NA_character_, all_scope = TRUE))
+  }
+  
   header <- case_when(
     str_detect(scope, "^\\s*hs6\\s*:") ~ "hs6",
     str_detect(scope, "^\\s*hs8\\s*:") ~ "hts8",
@@ -60,18 +68,22 @@ expand_scope_string <- function(scope) {
   
   map_dfr(parts, function(s) {
     s <- str_trim(s)
+    if (s == "") return(tibble(level = header, code = NA_character_, all_scope = FALSE))
     if (str_detect(s, "-")) {
       lo <- only_digits(str_extract(s, "^[0-9]+"))
       hi <- only_digits(str_extract(s, "[0-9]+$"))
+      if (lo == "" || hi == "") return(tibble(level = header, code = NA_character_, all_scope = FALSE))
       stopifnot(nchar(lo) == nchar(hi))
       w <- nchar(lo)
       tibble(level = header,
-             code  = sprintf(paste0("%0", w, "d"), seq.int(as.integer(lo), as.integer(hi))))
+             code  = sprintf(paste0("%0", w, "d"), seq.int(as.integer(lo), as.integer(hi))),
+             all_scope = FALSE)
     } else {
-      tibble(level = header, code = only_digits(s))
+      dig <- only_digits(s)
+      if (dig == "") return(tibble(level = header, code = NA_character_, all_scope = FALSE))
+      tibble(level = header, code = dig, all_scope = FALSE)
     }
-  }) |>
-    distinct()
+  }) |> distinct()
 }
 
 # --- Tidy measures ---
@@ -91,7 +103,7 @@ measures <- measures_raw |>
 
 # --- Expand a single measure row into regime-scoped HTS/HS columns ---
 expand_one_row <- function(row) {
-  # tiny getter (keeps scalar strings)
+  
   gv <- function(nm) {
     v <- row[[nm]]
     if (is.null(v)) return(NA)
@@ -111,8 +123,9 @@ expand_one_row <- function(row) {
     gv("hs_revision")
   }
   
-  src_hs6  <- scopes |> filter(level == "hs6")  |> transmute(hs6  = norm6(code))
-  src_hts8 <- scopes |> filter(level == "hts8") |> transmute(hts8 = norm8(code))
+  src_all <- any(scopes$level == "ALL" & scopes$all_scope)
+  src_hs6  <- scopes |> filter(level == "hs6",  !is.na(code))  |> transmute(hs6  = norm6(code))
+  src_hts8 <- scopes |> filter(level == "hts8", !is.na(code))  |> transmute(hts8 = norm8(code))
   
   base <- tibble(
     id         = as.character(gv("id")),
@@ -122,8 +135,16 @@ expand_one_row <- function(row) {
     effect     = as.character(gv("effect")),
     rate_type  = as.character(gv("rate_type")),
     rate_value = suppressWarnings(as.numeric(gv("rate_value"))),
-    program    = as.character(gv("program"))
+    program    = as.character(gv("program")),
+    all_scope  = src_all
   )
+
+  # if 'all' scope, don't try to fabricate codes here; carry flag forward
+  if (src_all) {
+    return(base |> mutate(hts8_2012 = NA_character_, hs6_2012 = NA_character_,
+                          hts8_2017 = NA_character_, hs6_2017 = NA_character_,
+                          hts8_2022 = NA_character_, hs6_2022 = NA_character_))
+  }
   
   if (start_d < DATE_2017) {
     # ---- HS2012 regime (pre-2017) ----
@@ -197,21 +218,29 @@ expanded <- measures |>
 
 # ==================== Quarter explosion ====================
 explode_quarters <- function(df, cutoff_date = as.Date("2025-06-30")) {
-  if (nrow(df) == 0) return(tibble())
+  if (nrow(df) == 0)
+    return(tibble())
   df |>
     mutate(
       start_eff = as.Date(start_date),
-      end_eff   = pmin(coalesce(as.Date(end_date), cutoff_date + days(1)), cutoff_date + days(1)),
+      end_eff   = pmin(coalesce(
+        as.Date(end_date), cutoff_date + days(1)
+      ), cutoff_date + days(1)),
       q_start   = floor_date(start_eff, "quarter"),
       q_end     = floor_date(end_eff - days(1), "quarter")
     ) |>
     filter(start_eff < end_eff) |>
-    mutate(quarter = map2(q_start, q_end, ~ if (.x <= .y) seq(.x, .y, by = "quarter") else as.Date(NA))) |>
+    mutate(quarter = map2(q_start, q_end, ~ if (.x <= .y)
+      seq(.x, .y, by = "quarter")
+      else
+        as.Date(NA))) |>
     unnest(quarter, keep_empty = FALSE) |>
     mutate(
       q_lo = floor_date(quarter, "quarter"),
       q_hi = ceiling_date(quarter, "quarter"),
-      overlap_days    = pmax(0, as.numeric(pmin(end_eff, q_hi) - pmax(start_eff, q_lo))),
+      overlap_days    = pmax(0, as.numeric(
+        pmin(end_eff, q_hi) - pmax(start_eff, q_lo)
+      )),
       quarter_days    = as.numeric(q_hi - q_lo),
       frac_of_quarter = overlap_days / quarter_days
     ) |>
@@ -222,12 +251,13 @@ explode_quarters <- function(df, cutoff_date = as.Date("2025-06-30")) {
 # ==================== Materialisation (any regime -> quarter's HTS8) ====================
 # Ensures the HS/HTS columns exist before joining.
 ensure_scope_cols <- function(df) {
-  need <- c("hts8_2012","hts8_2017","hts8_2022","hs6_2012","hs6_2017","hs6_2022")
-  for (nm in need) if (!nm %in% names(df)) df[[nm]] <- NA_character_
-  mutate(df, across(all_of(need), as.character))
+  need <- c("hts8_2012","hts8_2017","hts8_2022","hs6_2012","hs6_2017","hs6_2022","all_scope")
+  for (nm in need) if (!nm %in% names(df)) df[[nm]] <- if (nm == "all_scope") FALSE else NA_character_
+  mutate(df, across(all_of(c("hts8_2012","hts8_2017","hts8_2022","hs6_2012","hs6_2017","hs6_2022")), as.character),
+         all_scope = as.logical(all_scope))
 }
 
-# Robust, “always-return-something” materialiser:
+# Materialise coverage descriptions from spreadsheet into HTS8 rows
 materialise_to_hts8 <- function(dfq) {
   dfq <- dfq |>
     ensure_scope_cols() |>
@@ -245,26 +275,42 @@ materialise_to_hts8 <- function(dfq) {
   template  <- dfq |> transmute(across(all_of(base_cols))) |> slice(0)
   empty_out <- function() bind_cols(template, tibble(hts8 = character()))
   
+  # helper to expand 'all' by regime
+  expand_all <- function(df_sub) {
+    if (nrow(df_sub) == 0) return(tibble())
+    # split by regime and cross to the universe in that regime
+    a12 <- df_sub |> filter(regime == "2012", all_scope) |>
+      tidyr::crossing(tibble(hts8 = h2012$hts8_2012))
+    a17 <- df_sub |> filter(regime == "2017", all_scope) |>
+      tidyr::crossing(tibble(hts8 = h2017$hts8_2017))
+    a22 <- df_sub |> filter(regime == "2022", all_scope) |>
+      tidyr::crossing(tibble(hts8 = h2022$hts8_2022))
+    bind_rows(a12, a17, a22) |>
+      select(all_of(base_cols), hts8)
+  }
+  
+  dfq_nall <- dfq |> filter(!all_scope)
+  
   # ---- 2012 target ----
-  ex12 <- dfq |>
+  ex12 <- dfq_nall |>
     filter(regime == "2012", !is.na(hts8_2012)) |>
     select(all_of(base_cols), hts8_2012) |>
     transmute(across(all_of(base_cols)), hts8 = hts8_2012)
   
-  r12a <- dfq |>
+  r12a <- dfq_nall |>
     filter(regime == "2012", !is.na(hs6_2012)) |>
     select(all_of(base_cols), hs6_2012) |>
     inner_join(h2012, by = "hs6_2012", relationship = "many-to-many") |>
     transmute(across(all_of(base_cols)), hts8 = hts8_2012)
   
-  r12b <- dfq |>
+  r12b <- dfq_nall |>
     filter(regime == "2012", !is.na(hs6_2017)) |>
     select(all_of(base_cols), hs6_2017) |>
     inner_join(c17_12, by = "hs6_2017", relationship = "many-to-many") |>
     inner_join(h2012,  by = "hs6_2012", relationship = "many-to-many") |>
     transmute(across(all_of(base_cols)), hts8 = hts8_2012)
   
-  r12c <- dfq |>
+  r12c <- dfq_nall |>
     filter(regime == "2012", !is.na(hs6_2022)) |>
     select(all_of(base_cols), hs6_2022) |>
     inner_join(cc67,   by = "hs6_2022", relationship = "many-to-many") |>
@@ -276,18 +322,18 @@ materialise_to_hts8 <- function(dfq) {
   if (nrow(out12) == 0) out12 <- empty_out()
   
   # ---- 2017 target ----
-  ex17 <- dfq |>
+  ex17 <- dfq_nall |>
     filter(regime == "2017", !is.na(hts8_2017)) |>
     select(all_of(base_cols), hts8_2017) |>
     transmute(across(all_of(base_cols)), hts8 = hts8_2017)
   
-  r17a <- dfq |>
+  r17a <- dfq_nall |>
     filter(regime == "2017", !is.na(hs6_2017)) |>
     select(all_of(base_cols), hs6_2017) |>
     inner_join(h2017, by = "hs6_2017", relationship = "many-to-many") |>
     transmute(across(all_of(base_cols)), hts8 = hts8_2017)
   
-  r17b <- dfq |>
+  r17b <- dfq_nall |>
     filter(regime == "2017", !is.na(hs6_2012)) |>
     select(all_of(base_cols), hs6_2012) |>
     inner_join(distinct(c17_12, hs6_2012, hs6_2017),
@@ -295,7 +341,7 @@ materialise_to_hts8 <- function(dfq) {
     inner_join(h2017, by = "hs6_2017", relationship = "many-to-many") |>
     transmute(across(all_of(base_cols)), hts8 = hts8_2017)
   
-  r17c <- dfq |>
+  r17c <- dfq_nall |>
     filter(regime == "2017", !is.na(hs6_2022)) |>
     select(all_of(base_cols), hs6_2022) |>
     inner_join(cc67, by = "hs6_2022", relationship = "many-to-many") |>
@@ -306,18 +352,18 @@ materialise_to_hts8 <- function(dfq) {
   if (nrow(out17) == 0) out17 <- empty_out()
   
   # ---- 2022 target ----
-  ex22 <- dfq |>
+  ex22 <- dfq_nall |>
     filter(regime == "2022", !is.na(hts8_2022)) |>
     select(all_of(base_cols), hts8_2022) |>
     transmute(across(all_of(base_cols)), hts8 = hts8_2022)
   
-  r22a <- dfq |>
+  r22a <- dfq_nall |>
     filter(regime == "2022", !is.na(hs6_2022)) |>
     select(all_of(base_cols), hs6_2022) |>
     inner_join(h2022, by = "hs6_2022", relationship = "many-to-many") |>
     transmute(across(all_of(base_cols)), hts8 = hts8_2022)
   
-  r22b <- dfq |>
+  r22b <- dfq_nall |>
     filter(regime == "2022", !is.na(hs6_2017)) |>
     select(all_of(base_cols), hs6_2017) |>
     inner_join(distinct(cc67, hs6_2017, hs6_2022),
@@ -325,7 +371,7 @@ materialise_to_hts8 <- function(dfq) {
     inner_join(h2022, by = "hs6_2022", relationship = "many-to-many") |>
     transmute(across(all_of(base_cols)), hts8 = hts8_2022)
   
-  r22c <- dfq |>
+  r22c <- dfq_nall |>
     filter(regime == "2022", !is.na(hs6_2012)) |>
     select(all_of(base_cols), hs6_2012) |>
     inner_join(distinct(c17_12, hs6_2012, hs6_2017),
@@ -338,8 +384,11 @@ materialise_to_hts8 <- function(dfq) {
   out22 <- bind_rows(ex22, r22a, r22b, r22c)
   if (nrow(out22) == 0) out22 <- empty_out()
   
-  bind_rows(out12, out17, out22) |>
-    distinct()
+  out_all <- expand_all(dfq |> filter(all_scope))
+  
+  bind_rows(out12, out17, out22, out_all) |>
+    distinct() |>
+    select(-any_of("all_scope"))
 }
 
 # ==================== Shifters & Overrides ====================
