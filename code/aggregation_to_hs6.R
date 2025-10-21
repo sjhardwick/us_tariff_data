@@ -7,6 +7,9 @@ library(arrow)
 library(lubridate)
 library(stringr)
 
+# silence the summarise message in dplyr
+options(dplyr.summarise.inform = FALSE)
+
 # ---------- Paths ----------
 hts8_dir   <- "data/processed/tariffs_hts8_quarterly"          # input parquet files
 weights_fp <- "data/temp/weights.csv"                          # base weights: hs6, hts8, s_h8_in_h6
@@ -30,6 +33,9 @@ weights_base <- read_csv(
     hts8 = str_pad(hts8, 8, pad = "0")
   ) %>%
   select(hs6, hts8, s_h8_in_h6)
+
+# ensure uniqueness
+weights_base <- weights_base |> distinct(hs6, hts8, .keep_all = TRUE)
 
 # ---------- Helper: turn a correl table with 'relationship' into shares ----------
 # Rules:
@@ -84,6 +90,13 @@ hs_version_for_date <- function(d) {
     d <  ymd("2022-01-01") ~ "HS2017",
     TRUE                   ~ "HS2022"
   )
+}
+
+# Helper: Handle codes with no weights (set to NA rather than zero)
+wmean_na <- function(x, w) {
+  ok <- !is.na(x) & !is.na(w)
+  if (!any(ok)) return(NA_real_)
+  sum(x[ok] * w[ok]) / sum(w[ok])
 }
 
 # ---------- Helper: aggregate one parquet file ----------
@@ -158,10 +171,10 @@ aggregate_hts8_file <- function(file_path) {
       filter(!is.na(hs6_to), !is.na(share)) %>%
       group_by(i_iso3, quarter, year, qtr, hs6_to) %>%
       summarise(
-        tariff_weighted = sum(tariff_weighted_hs6 * share, na.rm = TRUE) / sum(share, na.rm = TRUE),
-        schedule_weighted = sum(schedule_weighted_hs6 * share, na.rm = TRUE) / sum(share, na.rm = TRUE),
-        tariff_simple   = sum(tariff_simple_hs6   * share, na.rm = TRUE) / sum(share, na.rm = TRUE),
-        schedule_simple = sum(schedule_simple_hs6 * share, na.rm = TRUE) / sum(share, na.rm = TRUE),
+        tariff_weighted   = wmean_na(tariff_weighted_hs6,   share),
+        schedule_weighted = wmean_na(schedule_weighted_hs6, share),
+        tariff_simple     = wmean_na(tariff_simple_hs6,     share),
+        schedule_simple   = wmean_na(schedule_simple_hs6,   share),
         n_hts8 = sum(n_hts8, na.rm = TRUE),
         .groups = "drop"
       ) %>%
@@ -183,6 +196,7 @@ aggregate_hts8_file <- function(file_path) {
 # ---------- Gather and process all parquet files ----------
 files <- list.files(hts8_dir, pattern = "\\.parquet$", recursive = TRUE, full.names = TRUE)
 message("Found ", length(files), " parquet files to process.")
+if (!length(files)) stop("No parquet files found in: ", hts8_dir)
 
 all_hs6_2012 <- purrr::map_dfr(files, ~{
   message("Processing: ", .x)
@@ -220,7 +234,7 @@ arrow::write_parquet(
 
 write_csv(all_hs6_2012, "data/processed/tariffs_hs6_2012_quarterly.csv")
 zip::zip(
-  "data/processed/tariffs_hs6_2012_quarterly.zip", 
+  "data/processed/tariffs_hs6_2012_quarterly_v0.2.2-beta.zip", 
   "data/processed/tariffs_hs6_2012_quarterly.csv"
 )
 
@@ -244,6 +258,6 @@ arrow::write_parquet(
 
 write_csv(annual_dt, "data/processed/tariffs_hs6_2012_annual.csv")
 zip::zip(
-  "data/processed/tariffs_hs6_2012_annual_v0.1.0-beta.zip", 
+  "data/processed/tariffs_hs6_2012_annual_v0.2.2-beta.zip", 
   "data/processed/tariffs_hs6_2012_annual.csv"
 )
