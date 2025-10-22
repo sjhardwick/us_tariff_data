@@ -1,6 +1,6 @@
 # ==========================================
 # Build HS2012 6-digit weights from Schott
-# Using 2012–2014 annual (Dec YTD) imports
+# Using 2012 annual (Dec YTD) imports
 # ==========================================
 
 library(tidyverse)
@@ -20,8 +20,8 @@ pick_value_col <- function(df) {
   df[[nm]]
 }
 
-# --- read 2012–2014 Dec files and stack ---
-years <- 2012:2014
+# --- read 2012 (and other years if applicable) files and stack ---
+years <- 2012
 files <- glue::glue("data/raw/trade_schott/imp_detl_{years}_12n.dta")
 names(files) <- years
 stopifnot(all(file.exists(files)))
@@ -40,12 +40,12 @@ weights_src <- map_dfr(names(files), function(yy) {
 }) %>%
   filter(!is.na(val), val > 0)
 
-# --- collapse to HTS8 and HS6, average across 2012–2014 ---
+# --- collapse to HTS8 and HS6, average across years chosen ---
 w8_year <- weights_src %>%
   group_by(year, hts8) %>%
   summarise(v8 = sum(val, na.rm = TRUE), .groups = "drop")
 
-# average across 3 years
+# average across years
 w8_main <- w8_year %>%
   group_by(hts8) %>%
   summarise(w8_main = mean(v8, na.rm = TRUE), .groups = "drop")
@@ -57,10 +57,13 @@ h8_to_h6 <- weights_src %>%
 weights <- w8_main %>%
   inner_join(h8_to_h6, by = "hts8") %>%
   group_by(hs6) %>%
-  mutate(W6 = sum(w8_main, na.rm = TRUE),
-         s_h8_in_h6 = if_else(W6 > 0, w8_main / W6, NA_real_)) %>%
+  mutate(
+    n_h8     = dplyr::n(),
+    W6       = sum(w8_main, na.rm = TRUE),
+    s_h8_in_h6 = if_else(W6 > 0, w8_main / W6, NA_real_)
+  ) %>%
   ungroup() %>%
-  select(hs6, hts8, s_h8_in_h6, w8_main, W6)
+  select(hs6, hts8, n_h8, s_h8_in_h6, w8_main, W6)
 
 # --- sanity checks ---
 # 1) HTS8 must not start with "00"
@@ -70,7 +73,7 @@ if (nrow(bad_h8)) {
 }
 
 # 2) Each HS6 should have >=1 HTS8; many have multiple
-summary_by_hs6 <- weights %>% count(hs6, name="n_h8")
+summary_by_hs6 <- weights %>% dplyr::count(hs6, name="n_h8")
 # glance:
 summary_by_hs6 %>% summarise(min_h8 = min(n_h8), median_h8 = median(n_h8), max_h8 = max(n_h8))
 

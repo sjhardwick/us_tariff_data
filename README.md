@@ -6,17 +6,17 @@
 
 ## Download the data
 
-The latest **quarterly HS6–2012 tariff dataset (2015 Q1–2025 Q2)** is available from the\
-[**Releases page**](https://github.com/sjhardwick/us_tariff_data/releases).
+The latest **quarterly and annual HS6–2012 tariff datasets (2013 Q1–2025 Q2)** are available from the [**Releases page**](https://github.com/sjhardwick/us_tariff_data/releases).
 
 Each release archive (`.zip`) contains a single CSV file of the full dataset.
 
 ## To-do
 
--   [ ] Review `data/raw/preferences.csv` to ensure accurate reflection of changes in preference schemes
--   [ ] Use concordances for 2010 and 2011 import data to obtain more accurate HTS-2012 unit values
--   [ ] Upload annual dataset
+-   [ ] Review preferences list (`data/raw/preferences.csv`) to ensure accurate reflection of changes in preference schemes
+-   [ ] Use HTS8 concordances for 2010 and 2011 import data to obtain more accurate HTS-2012 unit values
 -   [ ] Add 2025 Q3–Q4 data once available
+-   [x] Upload annual dataset
+-   [x] Fix handling of measures that shift all HTS8 products uniformly
 
 ## How tariff rates were obtained
 
@@ -29,7 +29,7 @@ The dataset extends the USITC tables with relevant additional measures obtained 
 
 ### Retrieving special measures from Global Trade Alert
 
-1.  Extract all Global Trade Alert (GTA) measures implemented since 1 January 2015.
+1.  Extract all Global Trade Alert (GTA) measures implemented since 1 January 2013.
 
 2.  Filter (`code/compile_gta_data.R`) to import tariffs that are:
 
@@ -38,13 +38,13 @@ The dataset extends the USITC tables with relevant additional measures obtained 
     -   Not preference scheme changes (e.g. GSP updates) or other tariff changes that are already captured in USITC tables.
     -   Not cancelled before they took effect (specifically, the time between implementation and removal must exceed one day).
 
-3.  After filtering, 132 GTA interventions remain, each linked to affected jurisdictions and HS-6 sectors (`data/temp/gta.xlsx`). Additional manual filtering is undertaken to consolidate or remove duplicates, remove measures based solely on originating content (e.g. aluminium originating in Russia) or that remove *de minimis* thresholds.
+3.  After filtering, about 130 GTA interventions remain, each linked to affected jurisdictions and HS6 sectors (`data/temp/gta.xlsx`). Additional manual filtering is undertaken to consolidate or remove duplicates, remove measures based solely on originating content (e.g. aluminium originating in Russia) or that only concern *de minimis* thresholds.
 
-4.  This further filtering reduces the number of interventions to 89 (`data/temp/measures.csv`).
+4.  This further filtering reduces the number of interventions to about 90 (`data/temp/measures.csv`).
 
 5.  Each intervention is manually coded to indicate whether it adds to or overrides an existing tariff rate.
 
-    -   Default GTA coverage is HS6-2022; where possible, this is refined to HTS-8 using documents linked to by GTA or on the Federal Register.
+    -   Default GTA coverage is HS6-2022; where possible, this is refined to HTS8 using documents linked to by GTA or on the Federal Register.
     -   Section 301 product lists were extracted from Federal Register PDFs.
 
 6.  Exemptions (e.g. Section 301 product exclusions) are flagged so that tariff changes associated with that product/program combination are set to zero during the exemption period. Other tariffs on those products, if unaffected by the exemption, remain in the data.
